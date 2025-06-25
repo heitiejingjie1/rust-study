@@ -1,5 +1,6 @@
 fn main() {
     println!("Hello, world!");
+    enum_example();
 }
 
 #[derive(Debug)]
