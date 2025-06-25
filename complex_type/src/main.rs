@@ -2,10 +2,42 @@ fn main() {
     // slice();
     // string_and_str();
     // operation_string();
-    tuple();
+    // tuple();
+    struct_test();
+
+    enum_test();
 }
 
+// 枚举
+#[derive(Debug)]
+enum PokerSuit {
+    Spades,
+    Hearts,
+    Diamonds,
+    Clubs,
+}
+// 枚举的实例化
+fn enum_test() {
+    let clubs = PokerSuit::Clubs;
+    let hearts = PokerSuit::Hearts;
+
+    print_suit(clubs);
+    print_suit(hearts);
+}
+
+fn print_suit(suit: PokerSuit) {
+    println!("{:?}", suit);
+}
+
+// 元组结构体
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+// 单元结构体
+struct UnitStruct;
+
 // 结构体的定义
+#[derive(Debug)]
 struct User {
     active: bool,
     username: String,
@@ -30,6 +62,17 @@ fn struct_test() {
         email: String::from("fengmuxia@git.com"),
         ..user1 // 使用user1的其他字段
     };
+
+    // 利用函数创建结构体实例
+    let user3 = build_user(
+        String::from("fengmuxia@gmail.com"),
+        String::from("fengmuxia"),
+    );
+    println!("{:#?}", user3);
+    println!("User3: {}, Email: {}", user3.username, user3.email);
+
+    let blank = Color(0, 0, 0);
+    let zero = Point(0, 0, 0);
 }
 
 fn build_user(email: String, username: String) -> User {
