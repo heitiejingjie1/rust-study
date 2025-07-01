@@ -18,4 +18,20 @@ fn array_demo() {
     // 访问数组
     let first = arr[0];
     println!("The first element is: {}", first);
+
+    // println!("{}", arr2);
+    for r in arr2.iter() {
+        println!("{}", r);
+    }
+
+    let arr3 = [3; 10]; // 创建一个长度为10的数组，所有元素都为3 
+    println!("Array with all elements as 3: {:?}", arr3);
+
+    // 复杂类型数组
+    let complex_arr: [String; 3] = std::array::from_fn(|_i| String::from("Hello"));
+    println!("Complex array: {:?}", complex_arr);
+
+    // 多维数组
+    let multi_dimensional_array: [[i32; 2]; 3] = [[1, 2], [3, 4], [5, 6]];
+    println!("Multi-dimensional array: {:?}", multi_dimensional_array);
 }
