@@ -1,22 +1,22 @@
 /base/target  
-/base/cargo.lock
+/base/Cargo.lock
 
  /complexType/array/target
- /complexType/array/cargo.lock
+ /complexType/array/Cargo.lock
 /complexType/string/target
-/complexType/string/cargo.lock
+/complexType/string/Cargo.lock
 /complexType/structure/target  
-/complexType/structure/cargo.lock
+/complexType/structure/Cargo.lock
 /complexType/tuple/target
-/complexType/tuple/cargo.lock
+/complexType/tuple/Cargo.lock
 /complexType/enumerate/target
-/complexType/enumerate/cargo.lock
+/complexType/enumerate/Cargo.lock
  
  /control/target
-/control/cargo.lock
+/control/Cargo.lock
 
 /match_demo/target
-/match_demo/cargo.lock
+/match_demo/Cargo.lock
 
 /ownership/target
-/ownership/cargo.lock
+/ownership/Cargo.lock
