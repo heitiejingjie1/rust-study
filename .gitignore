@@ -20,3 +20,9 @@
 
 /ownership/target
 /ownership/Cargo.lock
+
+/function/target
+/function/Cargo.lock
+
+/genericsAndTraits/generics/target
+/genericsAndTraits/generics/Cargo.lock
