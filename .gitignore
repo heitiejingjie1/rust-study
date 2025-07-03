@@ -26,3 +26,11 @@
 
 /genericsAndTraits/generics/target
 /genericsAndTraits/generics/Cargo.lock
+
+/life/target
+/life/Cargo.lock
+
+/genericsAndTraits/traits/target
+/genericsAndTraits/traits/Cargo.lock
+
+
