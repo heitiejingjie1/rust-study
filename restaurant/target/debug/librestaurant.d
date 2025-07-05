@@ -1,1 +1,0 @@
-/home/user/rust-study/package/restaurant/target/debug/librestaurant.rlib: /home/user/rust-study/package/restaurant/src/front_of_house/hosting.rs /home/user/rust-study/package/restaurant/src/front_of_house.rs /home/user/rust-study/package/restaurant/src/lib.rs
