@@ -1,5 +1,12 @@
+use crate::garden::vegetables::Asparagus;
+
+pub mod garden;
+
+extern crate restaurant;
+
 fn main() {
     println!("Hello, world!");
+    let plant = Asparagus {};
 }
 
 // 一个包（package）可以包含多个二进制 crate 项和一个可选的库 crate。
@@ -12,3 +19,5 @@ fn main() {
 //  -- 库crate: 并没有 main 函数，它们也不会编译为可执行程序,定义了可供多个项目复用的功能模块
 
 // modules和use: 允许你控制作用域和路径的私有性。
+
+// paths: modules的路径
