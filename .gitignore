@@ -35,3 +35,6 @@
 
 /gather/target
 /gather/Cargo.lock
+
+/package/target
+/package/Cargo.lock

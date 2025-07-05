@@ -1,4 +1,7 @@
-use std::{fmt::{Debug, Display}, path::Components};
+use std::{
+    fmt::{Debug, Display},
+    path::Components,
+};
 
 fn main() {
     traits_demo();
@@ -21,15 +24,15 @@ fn traits_demo() {
     //
     bungee(&kitty);
 
-    let post = Post{
+    let post = Post {
         title: "first".to_string(),
         author: "heitiejingjie".to_string(),
-        content: "我就是我".to_string()
+        content: "我就是我".to_string(),
     };
 
     let weibo = Weibo {
         username: "fengmuxia".to_string(),
-        content: "aiaiaiaiia".to_string()
+        content: "aiaiaiaiia".to_string(),
     };
 
     println!("{}", post.summarize());
@@ -42,14 +45,13 @@ fn traits_demo() {
     type_transform();
 }
 
-// 定義一個 Trait 
+// 定義一個 Trait
 trait Flyable {
     fn fly(&self) {
         // Trait 可以有预设实现
         // 如果没有提供具体实现，则会使用默认实现
         print!("Default fly behavior");
-    }  // 只需定义函数签名就行了
-    
+    } // 只需定义函数签名就行了
 }
 
 #[derive(Debug)]
@@ -85,13 +87,13 @@ pub trait Summary {
     }
 }
 
-pub struct Post{
+pub struct Post {
     pub title: String,
     pub author: String,
     pub content: String,
 }
 
-impl Summary for Post{
+impl Summary for Post {
     fn summarize_author(&self) -> String {
         format!("{}", self.author)
     }
@@ -116,7 +118,7 @@ fn notify(item: &impl Summary) {
 
 // 特征约束
 // 与特征参数一致,特征参数只是特征约束的语法糖
-fn notify2<T: Summary> (item: &T) {
+fn notify2<T: Summary>(item: &T) {
     println!("Breaking news. {}", item.summarize());
 }
 
@@ -128,11 +130,13 @@ fn notify4(item: &(impl Summary + Display)) {
 
 // where 约束
 fn some_function<T, U>(t: &T, u: &U)
-    where T: Display + Clone,
-        U: Clone + Debug
-{}
-        
-// 函数返回中的impl Trait 
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+}
+
+// 函数返回中的impl Trait
 // 只能返回一个特定的类型,不能返回不同的类型
 // fn returns_summarizable () -> impl Summary {
 //     Weibo {
@@ -145,13 +149,13 @@ fn some_function<T, U>(t: &T, u: &U)
 // 被derive标记的对象会自动实现对应的默认特征代码，继承相应的功能
 
 // tryinto:类型转换
-fn type_transform(){
+fn type_transform() {
     let a: i32 = 10;
     let b: u16 = 100;
 
     let b_ = b.try_into().unwrap();
 
-    if a < b_{
+    if a < b_ {
         println!("ten is less than one hundred.");
     }
 }
@@ -179,37 +183,23 @@ trait Draw {
 struct Button {
     weight: u32,
     height: u32,
-    labal: String
+    labal: String,
 }
 
-struct SelectBox{
+struct SelectBox {
     weight: u32,
     height: u32,
-    options: Vec<String>
+    options: Vec<String>,
 }
 
 impl Draw for Button {
-    fn draw(&self) {
-        
-    }
+    fn draw(&self) {}
 }
 
 impl Draw for SelectBox {
-    fn draw(&self) {
-        
-    }
+    fn draw(&self) {}
 }
 
-pub struct Screen<T: Draw>{
+pub struct Screen<T: Draw> {
     pub components: Vec<T>,
-}
-
-impl <T> Screen<T>
-    where <T: Draw> {
-    pub fn run(&self) {
-        for component in self.components.iters() {
-            component.draw();
-        }
-        
-    }
 }
