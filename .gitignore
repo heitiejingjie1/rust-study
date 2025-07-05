@@ -41,3 +41,6 @@
 
 /restaurant/target
 /restaurant/Cargo.lock 
+
+/error/target
+/error/Cargo.lock 
