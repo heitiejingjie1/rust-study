@@ -1,4 +1,9 @@
-use std::array;
+use crate::generic::generic::test;
+use crate::life_mod::life;
+use crate::trait_mod::trait_type;
+pub mod generic;
+pub mod life_mod;
+pub mod trait_mod;
 
 fn main() {
     println!("Hello, world!");
@@ -6,11 +11,15 @@ fn main() {
     println!("{}", add(1, 2));
     print_point();
     print_const();
+    test();
+    // trait_type::test_trait();
+    life::dangling_references();
+    life::test_life();
 }
 
 // 使用泛型函数
-fn add<T: std::ops::Add<Output = T>>(a: T, b: T ) -> T {
-    a + b 
+fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+    a + b
 }
 
 fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> &T {
@@ -37,7 +46,7 @@ struct Point2<T, U> {
     y: U,
 }
 
-fn print_point () {
+fn print_point() {
     let p1 = Point { x: 1, y: 2 };
     let p2 = Point { x: 1.0, y: 2.0 };
 
@@ -51,13 +60,12 @@ fn print_point () {
     println!("Point 1: ({}, {})", p1.x, p1.y);
 
     p1.print_x();
-    println!("point: {}", p2.distance_from_origin()); 
+    println!("point: {}", p2.distance_from_origin());
 }
 
 // 方法中使用泛型
-impl <T: std::fmt::Debug> Point<T>  {
-
-    fn print_x(&self)  -> &T{
+impl<T: std::fmt::Debug> Point<T> {
+    fn print_x(&self) -> &T {
         println!("x: {:?}", self.x);
         &self.x
     }
@@ -71,14 +79,13 @@ impl Point<f32> {
 }
 
 // const 泛型
-fn display_arr<T: std::fmt::Debug> (arr: &[T]) {
-    println!("{:?}", arr);  
+fn display_arr<T: std::fmt::Debug>(arr: &[T]) {
+    println!("{:?}", arr);
 }
 
-fn display_arr2<T: std::fmt::Debug, const N: usize> (arr: [T; N]) {
-    println!("{:?}", arr);  
+fn display_arr2<T: std::fmt::Debug, const N: usize>(arr: [T; N]) {
+    println!("{:?}", arr);
 }
-
 
 fn print_const() {
     let arr: [i32; 5] = [1, 2, 3, 4, 5];

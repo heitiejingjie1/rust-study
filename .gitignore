@@ -44,3 +44,6 @@
 
 /error/target
 /error/Cargo.lock 
+
+/test_demo/target
+/test_demo/Cargo.lock
