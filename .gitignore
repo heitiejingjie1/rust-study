@@ -50,3 +50,9 @@
 
 /adder.lib/target
 /adder.lib/Cargo.lock 
+
+/minigrep/target
+/minigrep/Cargo.lock
+
+/closures_iterators/target
+/closures_iterators/Cargo.lock

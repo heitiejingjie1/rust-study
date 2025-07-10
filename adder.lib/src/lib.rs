@@ -1,4 +1,4 @@
-use std::io::SeekFrom;
+use std::{fmt::format, io::SeekFrom};
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
@@ -16,6 +16,10 @@ impl Rectangle {
     }
 }
 
+pub fn greeting(name: &str) -> String {
+    format!("hello {name}")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -29,7 +33,19 @@ mod tests {
     #[test]
     fn not_works() {
         let result = add(2, 3);
-        assert_ne!(result, 5);
+        assert_ne!(!result, 5);
+    }
+
+    // 利用result处理测试
+    #[test]
+    fn it_works2() -> Result<(), String> {
+        let result = add(6, 4);
+
+        if result == 10 {
+            Ok(())
+        } else {
+            Err("6 + 4 != 10".to_string())
+        }
     }
 
     #[test]
@@ -46,5 +62,25 @@ mod tests {
 
         // assert!(larger.can_hold(&smaller));
         assert!(!smaller.can_hold(&larger));
+    }
+
+    // 自定义失败信息
+    #[test]
+    fn greeting_contains_name() {
+        let result = greeting("fengmuxia");
+        assert!(
+            result.contains("fengmuxia"),
+            "Greeting did not contains name, it's {result}"
+        );
+    }
+
+    // 使用should_panic检查运行代码中是否有panic
+    #[test]
+    #[ignore] // 忽略该测试
+    #[should_panic(expected = "is or no contains name")]
+    fn greeting_contains_name2() {
+        let result = greeting("heitiejingjie");
+
+        assert!(result.contains("heitiejingjie"));
     }
 }
