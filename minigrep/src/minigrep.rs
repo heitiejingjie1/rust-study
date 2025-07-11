@@ -8,13 +8,36 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
+    // pub fn build(args: &[String]) -> Result<Config, &'static str> {
+    //     if args.len() < 3 {
+    //         return Err("not enough arguments");
+    //     }
 
-        let query = args[1].clone();
-        let file_path = args[2].clone();
+    //     let query = args[1].clone();
+    //     let file_path = args[2].clone();
+    //     let ignore_case = env::var("IGNORE_CASE").is_ok();
+
+    //     Ok(Config {
+    //         query,
+    //         file_path,
+    //         ignore_case,
+    //     })
+    // }
+
+    // 改进版
+    pub fn build(mut args: impl Iterator<Item = String>) -> Result<Config, &'static str> {
+        args.next();
+
+        let query = match args.next() {
+            Some(args) => args,
+            None => return Err("Didn't get a query string."),
+        };
+
+        let file_path = match args.next() {
+            Some(args) => args,
+            None => return Err("Didn't get a file path."),
+        };
+
         let ignore_case = env::var("IGNORE_CASE").is_ok();
 
         Ok(Config {
@@ -73,20 +96,26 @@ Trust me.";
     }
 }
 
-pub fn search<'a>(query: &'a str, content: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
+pub fn search<'a>(query: &'a str, contents: &'a str) -> Vec<&'a str> {
+    // let mut results = Vec::new();
 
-    // 遍历读入的文本
-    for line in content.lines() {
-        // 查询该行是否包含该字符串
-        if line.contains(query) {
-            // 存储该行
-            results.push(line);
-        }
-    }
+    // // 遍历读入的文本
+    // for line in contents.lines() {
+    //     // 查询该行是否包含该字符串
+    //     if line.contains(query) {
+    //         // 存储该行
+    //         results.push(line);
+    //     }
+    // }
 
-    // 返回该行
-    results
+    // // 返回该行
+    // results
+
+    // 改进版
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 pub fn search_case_insensitive<'a>(query: &'a str, content: &'a str) -> Vec<&'a str> {

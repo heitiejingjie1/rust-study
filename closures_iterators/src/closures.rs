@@ -60,6 +60,10 @@ pub fn test_closures() {
         user_pref2, giveaway2
     );
 
+    close();
+}
+
+fn close() {
     // 闭包语法
     let add_one_v1 = |x: u32| -> u32 { x + 1 }; // 完整语法
     let add_one_v2 = |x: u32| x + 1; // 简写
@@ -87,4 +91,46 @@ pub fn test_closures() {
     thread::spawn(move || println!("From thread: {list:?}"))
         .join()
         .unwrap();
+
+    /*
+     * 根据闭包体如何处理这些值，闭包会自动、渐进地实现一个、两个或全部三个 Fn trait。
+     * FnOnce: 只能被调用一次的闭包
+     * FnMut: 适用于不会将捕获的值移出闭包体，但可能会修改捕获值的闭包,可以被调用多次
+     * Fn: 适用于既不将捕获的值移出闭包体，也不修改捕获值的闭包，同时也包括不从环境中捕获任何值的闭包,可以被调用多次
+     * */
+
+    let mut list = [
+        Rectangle {
+            width: 5,
+            height: 9,
+        },
+        Rectangle {
+            width: 1,
+            height: 13,
+        },
+        Rectangle {
+            width: 9,
+            height: 10,
+        },
+    ];
+
+    list.sort_by_key(|k| k.height);
+
+    println!("{:#?}", list);
+
+    // 错误调用
+    let mut num_sort_operations = 0;
+
+    list.sort_by_key(|k| {
+        num_sort_operations += 1;
+        k.width;
+    });
+
+    println!("{list:#?}, num_sort_operations = {num_sort_operations}");
+}
+
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
