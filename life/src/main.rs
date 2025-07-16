@@ -7,8 +7,7 @@ struct Cat {
     age: u8,
 }
 
-fn life_demo () {
-
+fn life_demo() {
     // let age = 29;
 
     // let my_age = &age;
@@ -37,13 +36,26 @@ fn life_demo () {
     let older_cat = boss_cat(&cat1, &cat2);
 
     println!("boss cat is {}", older_cat.name);
-
 }
 
 fn boss_cat<'a>(c1: &'a Cat, c2: &'a Cat) -> &'a Cat {
-    if c1.age > c2.age {
-        c1
-    } else {
-        c2
+    if c1.age > c2.age { c1 } else { c2 }
+}
+
+#[derive(Debug)]
+struct Foo;
+
+impl Foo {
+    fn mutate_and_share(&mut self) -> &Self {
+        &*self
     }
+
+    fn share(&self) {}
+}
+
+fn test_foo() {
+    let mut foo = Foo;
+    let loan = foo.mutate_and_share();
+    foo.share();
+    println!("{:?}", loan);
 }

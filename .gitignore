@@ -56,3 +56,6 @@
 
 /closures_iterators/target
 /closures_iterators/Cargo.lock
+
+/smart_pointers/Cargo.lock
+/smart_pointers/target
