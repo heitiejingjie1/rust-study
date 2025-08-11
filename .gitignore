@@ -65,3 +65,6 @@
 
 /deep_rust/statement_and_expression/Cargo.lock 
 /deep_rust/statement_and_expression/target
+
+/deep_rust/function/Cargo.lock 
+/deep_rust/function/target
