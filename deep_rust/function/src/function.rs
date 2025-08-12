@@ -1,8 +1,11 @@
 pub mod func {
-    use std::i32;
+    use core::num;
+    use std::{i32, usize};
 
     pub fn display() {
         test_demo();
+        // diverging_function();
+        const_fn_demo();
     }
 
     fn add1(x: (i32, i32)) -> i32 {
@@ -26,5 +29,28 @@ pub mod func {
         func_1 = add2; // 再将该值指向add2
     }
 
-    fn diverging_function() {}
+    fn diverging_function() {
+        // 发散函数，返回类型为"!"的函数
+        // 可以被转换为任意类型
+        fn deverges() -> ! {
+            panic!("The function never returns");
+        }
+
+        let x: i32 = deverges();
+        let y: f64 = deverges();
+
+        deverges();
+    }
+
+    fn const_fn_demo() {
+        // const fn 函数编译期计算
+        const fn cube(number: usize) -> usize {
+            number * number * number
+        }
+
+        const DIM: usize = cube(2);
+        const ARR: [i32; DIM] = [0; DIM];
+
+        println!("{:?}", ARR);
+    }
 }

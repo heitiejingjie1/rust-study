@@ -68,3 +68,6 @@
 
 /deep_rust/function/Cargo.lock 
 /deep_rust/function/target
+
+/deep_rust/trait_demo/Cargo.lock 
+/deep_rust/trait_demo/target
