@@ -1,9 +1,9 @@
+mod owner_ship;
+
+use crate::owner_ship::owner_ship::display;
+
 fn main() {
-    // test_string();
-    // ownertrans();
-    // owner_move();
-    ownership_borrowinv();
-    dangling_reference();
+    display();
 }
 
 fn dangling_reference() {
@@ -63,20 +63,6 @@ fn owner_move() {
     let x = 42;
     function_owner_copy(x);
     println!("x = {}", x); // 输出: x = 42, 因为整数类型是 Copy 类型，x 的值被复制到函数内部
-}
-
-// string 类型
-fn test_string() {
-    let s = "hello"; // 字面值类型, 不可更改
-    let mut s1 = String::from("hello"); // String 类型
-    s1.push_str(", world!");
-
-    println!("{}", s1); // 输出: hello, world!
-    //
-    let a = 12;
-    let b = a; // 整数类型是 Copy 类型，a 的值被复制到 b 中
-
-    println!("a: {}, b: {}", a, b); // 输出: a: 12, b: 12
 }
 
 // 所有权转移
