@@ -1,8 +1,10 @@
+// 所有权
 pub mod owner_ship {
-    pub fn display() {
+    pub fn owner_display() {
         owner_string();
         owner_trans();
         owner_move();
+        println!("========^======^^=");
     }
 
     // string 类型
@@ -90,5 +92,108 @@ pub mod owner_ship {
         // 函数参数是 i32 类型，整数类型是 Copy 类型，值被复制到函数内部
         println!("Received integer: {}", some_integer);
         // some_integer 在函数结束时被销毁
+    }
+}
+
+// 引用与借用
+// 将创建引用的行为称为借用(borrowing)
+pub mod reference {
+    use std::usize;
+
+    pub fn reference_display() {
+        reference_test();
+    }
+
+    fn reference_test() {
+        let mut s = "就是我".to_string();
+        println!("{s} len is {}", calculate_len(&s));
+        change_str(&mut s);
+
+        // 同一作用域只能创建一次可变引用
+        // 但可创建多次不可变引用
+        // 在创建可变引用之后,不能再次使用不可变引用,会造成数据竞争
+        {
+            let mut inner_str = "hello".to_string();
+
+            let str1 = &inner_str;
+            let str2 = &inner_str;
+
+            println!("str1 = {str1}, str2 = {str2}");
+
+            let mut_str1 = &mut inner_str;
+            // let mut_str2 = &mut inner_str;
+            mut_str1.push_str(", world!");
+            // let after_str1 = &inner_str;
+
+            println!("mut_str1 = {mut_str1}");
+        }
+    }
+
+    // 参数引用传递
+    // 允许函数使用值，但不获取所有权
+    // 不能修改所引用的变量,没有改变量的所有权
+    fn calculate_len(str: &String) -> usize {
+        // str.push_str(", 怎么样");
+        str.len()
+    }
+
+    //可变引用
+    fn change_str(str: &mut String) {
+        str.push_str(", 怎么样");
+        println!("{str}");
+    }
+
+    // 悬垂引用
+    fn dangling_reference() {
+        let s = "hahh".to_string();
+        // &s
+    } // s的值在离开此作用域时被丢弃，无法再次借用
+}
+
+// 切片
+// 允许你引用集合中一段连续的序列，而不用引用整个集合
+// 也不拥有该集合所有权
+pub mod slice {
+    pub fn slice_display() {
+        let str = "hello world jiudhiwo".to_string();
+        let slice = first_word_slice(&str);
+
+        // str.clear();
+        println!("{slice}");
+    }
+
+    //引入问题
+    fn first_word(str: &String) -> usize {
+        let bytes = str.as_bytes();
+
+        for (i, &item) in bytes.iter().enumerate() {
+            if item == b' ' {
+                return i;
+            }
+        }
+
+        return str.len();
+    }
+
+    // 修改函数
+    fn first_word_slice(str: &str) -> &str {
+        let bytes = str.as_bytes();
+
+        for (i, &item) in bytes.iter().enumerate() {
+            if item == b' ' {
+                return &str[0..i];
+            }
+        }
+
+        return &str[..];
+    }
+
+    // 字符串切片
+    fn string_slice() {
+        let str = "hello world".to_string();
+        let hello = &str[..5];
+        let world = &str[6..];
+
+        println!("{hello}, {world}");
     }
 }
