@@ -12,6 +12,15 @@ pub mod slice_demo {
 
         s.clear();
         println!("{word}");
+
+        // 切片slice
+        {
+            let s = String::from("hello,world");
+            let hello = &s[0..5];
+            let world = &s[6..11];
+
+            println!("{hello},{world}");
+        }
     }
 
     fn first_word(s: &String) -> usize {
@@ -26,5 +35,5 @@ pub mod slice_demo {
         s.len()
     }
 
-    fn second_word(s: &String) -> (usize, usize) {}
+    // fn second_word(s: &String) -> (usize, usize) {}
 }
